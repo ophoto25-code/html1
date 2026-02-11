@@ -142,8 +142,7 @@
     }
 
     .moon-button.hidden {
-      opacity: 0;
-      transform: scale(0.78);
+      transform: none;
     }
 
     .moon-svg {
@@ -162,14 +161,14 @@
     .message {
       margin-top: 1rem;
       min-height: 1.8em;
-      font-size: clamp(1rem, 2.4vw, 1.35rem);
+      font-size: clamp(1.35rem, 3vw, 2.1rem);
       color: #f6e8ff;
       transition: all 0.25s ease;
     }
 
     .message.alt-font {
       font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-size: clamp(2rem, 4.2vw, 3rem);
       color: #ffd9f4;
       letter-spacing: 0.03em;
     }
@@ -209,7 +208,7 @@
         <ellipse cx="127" cy="130" rx="15" ry="9" fill="#ffbe93" opacity="0.4" />
       </svg>
     </button>
-    <div class="moon-hint">apachurra la luna</div>
+    <div class="moon-hint">apachurrala otra vez</div>
 
     <div class="message" id="moonMessage"></div>
   </main>
@@ -220,6 +219,7 @@
     const monthsCounter = document.getElementById('monthsCounter');
     const moonButton = document.getElementById('moonButton');
     const moonMessage = document.getElementById('moonMessage');
+    const moonHint = document.querySelector('.moon-hint');
 
     let moonClicks = 0;
 
@@ -239,13 +239,14 @@
       moonMessage.classList.remove('alt-font');
 
       if (moonClicks === 1) {
-        moonButton.classList.add('hidden');
         moonMessage.textContent = 'quiero estar contigo siempre Alison';
       } else if (moonClicks === 2) {
         moonMessage.textContent = 'siempre';
+        moonHint.textContent = 'apachurrala de nuez';
       } else {
         moonMessage.textContent = 'siempre';
         moonMessage.classList.add('alt-font');
+        moonHint.textContent = 'apachurrala otra vez';
       }
     });
 
