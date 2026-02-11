@@ -52,27 +52,41 @@
       letter-spacing: 0.04em;
       text-shadow: 0 0 18px rgba(199, 165, 255, 0.45);
     }
+
+    .months {
+      margin-top: 0.4rem;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      font-weight: 400;
+      color: #c8cede;
+      letter-spacing: 0.01em;
+    }
   </style>
 </head>
 <body>
   <main class="card">
     <h1>Al dia de hoy llevamos juntos:</h1>
     <div class="days" id="daysCounter">0 días</div>
+    <div class="months" id="monthsCounter">0.00 meses</div>
   </main>
 
   <script>
     const START_DATE = new Date('2025-08-31T00:00:00');
     const daysCounter = document.getElementById('daysCounter');
+    const monthsCounter = document.getElementById('monthsCounter');
 
-    function updateDaysCounter() {
+    function updateCounters() {
       const now = new Date();
       const diffMs = now.getTime() - START_DATE.getTime();
-      const days = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+      const safeDiffMs = Math.max(0, diffMs);
+      const days = Math.floor(safeDiffMs / (1000 * 60 * 60 * 24));
+      const months = safeDiffMs / (1000 * 60 * 60 * 24 * 30.436875);
+
       daysCounter.textContent = `${days} día${days === 1 ? '' : 's'}`;
+      monthsCounter.textContent = `${months.toFixed(2)} meses`;
     }
 
-    updateDaysCounter();
-    setInterval(updateDaysCounter, 1000 * 60);
+    updateCounters();
+    setInterval(updateCounters, 1000 * 60);
   </script>
 </body>
 </html>
